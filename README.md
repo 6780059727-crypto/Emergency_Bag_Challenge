@@ -45,6 +45,62 @@
             opacity: 0.9;
         }
 
+        .game-instructions {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border: 3px solid #4caf50;
+            border-radius: 15px;
+            margin: 20px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .instruction-thai {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            border-left: 5px solid #2196f3;
+        }
+
+        .instruction-thai h3 {
+            color: #1976d2;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .instruction-thai p {
+            font-size: 1.1em;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .instruction-japanese {
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            border-left: 5px solid #ff5722;
+        }
+
+        .instruction-japanese h3 {
+            color: #d84315;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .instruction-japanese p {
+            font-size: 1.1em;
+            color: #333;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        .reading {
+            font-size: 0.9em !important;
+            color: #666 !important;
+            font-style: italic;
+            margin-top: 5px;
+        }
+
         .game-controls {
             display: flex;
             justify-content: center;
@@ -115,6 +171,16 @@
             border: 3px dashed #ff9800;
         }
 
+        .section-instruction {
+            background: rgba(255, 152, 0, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+            margin: 10px 0 15px 0;
+            font-size: 0.9em;
+            line-height: 1.4;
+            border: 1px solid rgba(255, 152, 0, 0.3);
+        }
+
         .items-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
@@ -165,6 +231,18 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+        }
+
+        .bag-instruction {
+            background: rgba(33, 150, 243, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0 15px 0;
+            font-size: 0.85em;
+            line-height: 1.4;
+            border: 1px solid rgba(33, 150, 243, 0.3);
+            text-align: center;
+            max-width: 280px;
         }
 
         .backpack {
@@ -299,6 +377,16 @@
             padding: 20px;
         }
 
+        .vocab-instruction {
+            background: rgba(156, 39, 176, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+            margin: 10px 0 15px 0;
+            font-size: 0.9em;
+            line-height: 1.4;
+            border: 1px solid rgba(156, 39, 176, 0.3);
+        }
+
         .vocab-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -325,13 +413,26 @@
             font-size: 1.5em;
             font-weight: bold;
             color: #4a148c;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            line-height: 1.4;
         }
 
-        .vocab-reading {
-            font-size: 1em;
+        .vocab-japanese ruby {
+            ruby-align: center;
+        }
+
+        .vocab-japanese rt {
+            font-size: 0.5em;
             color: #7b1fa2;
+            font-weight: normal;
+        }
+
+        .vocab-romaji {
+            font-size: 1em;
+            color: #8e24aa;
             margin-bottom: 5px;
+            font-style: italic;
+            font-weight: 500;
         }
 
         .vocab-english {
@@ -586,6 +687,28 @@
                 grid-template-columns: 1fr;
             }
             
+            .vocab-japanese {
+                font-size: 1.3em;
+            }
+            
+            .vocab-japanese rt {
+                font-size: 0.45em;
+            }
+            
+            .vocab-romaji {
+                font-size: 0.9em;
+            }
+            
+            .missed-item {
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: left;
+            }
+            
+            .missed-item span {
+                margin-bottom: 8px;
+            }
+            
             .feedback-message {
                 top: 10px;
                 right: 10px;
@@ -625,6 +748,28 @@
                 padding: 15px 20px;
                 font-size: 1em;
             }
+            
+            .game-instructions {
+                margin: 15px;
+                padding: 15px;
+            }
+            
+            .instruction-thai, .instruction-japanese {
+                padding: 12px;
+            }
+            
+            .instruction-thai h3, .instruction-japanese h3 {
+                font-size: 1.2em;
+            }
+            
+            .instruction-thai p, .instruction-japanese p {
+                font-size: 1em;
+            }
+            
+            .section-instruction, .bag-instruction, .vocab-instruction {
+                font-size: 0.8em;
+                padding: 10px;
+            }
         }
     </style>
 </head>
@@ -634,6 +779,18 @@
             <h1>🎒 緊急時バッグゲーム</h1>
             <p>災害に備えて正しいアイテムを選ぼう！</p>
         </header>
+
+        <div class="game-instructions">
+            <div class="instruction-thai">
+                <h3>📋 คำสั่ง</h3>
+                <p><strong>จงนำสิ่งของที่จำเป็นในการใช้ยามเกิดภัยพิบัติ ใส่ลงในกระเป๋าให้ถูกต้อง</strong></p>
+            </div>
+            <div class="instruction-japanese">
+                <h3>📋 指示 (しじ)</h3>
+                <p><strong>緊急時に必要なものを正しくかばんに入れましょう</strong></p>
+                <p class="reading">(きんきゅうじ に ひつよう な もの を ただしく かばん に いれましょう)</p>
+            </div>
+        </div>
 
         <div class="game-controls">
             <button class="difficulty-btn easy" onclick="startGame('easy')">
@@ -659,6 +816,10 @@
         <div class="game-area">
             <div class="items-section">
                 <h3>🛍️ アイテムを選んでね</h3>
+                <p class="section-instruction">
+                    <strong>วิธีเล่น:</strong> ลากสิ่งของที่คิดว่าจำเป็นในยามฉุกเฉินใส่กระเป๋า<br>
+                    <strong>遊び方:</strong> 緊急時に必要だと思うものをかばんにドラッグしてください
+                </p>
                 <div class="items-grid" id="itemsGrid">
                     <!-- Items will be populated by JavaScript -->
                 </div>
@@ -666,6 +827,10 @@
 
             <div class="bag-section">
                 <h3>🎒 緊急バッグ</h3>
+                <p class="bag-instruction">
+                    <strong>ใส่ที่นี่:</strong> ลากสิ่งของมาใส่ในกระเป๋า<br>
+                    <strong>ここに入れて:</strong> ものをかばんにドラッグしてください
+                </p>
                 <div class="backpack">
                     <div class="backpack-strap-left"></div>
                     <div class="backpack-strap-right"></div>
@@ -677,6 +842,10 @@
 
         <div class="vocabulary-section">
             <h3>📚 ことば辞典</h3>
+            <p class="vocab-instruction">
+                <strong>เรียนรู้คำศัพท์:</strong> กดปุ่ม 🔊 เพื่อฟังการออกเสียงภาษาญี่ปุ่น<br>
+                <strong>言葉を学ぼう:</strong> 🔊ボタンを押して日本語の発音を聞きましょう
+            </p>
             <div class="vocab-grid" id="vocabGrid">
                 <!-- Vocabulary cards will be populated by JavaScript -->
             </div>
@@ -695,25 +864,25 @@
     <script>
         // Game data
         const emergencyItems = [
-            { emoji: '💊', japanese: '薬', reading: 'くすり', english: 'Medicine', essential: true },
-            { emoji: '🔦', japanese: '懐中電灯', reading: 'かいちゅうでんとう', english: 'Flashlight', essential: true },
-            { emoji: '🥤', japanese: '水', reading: 'みず', english: 'Water', essential: true },
-            { emoji: '🍞', japanese: 'パン', reading: 'パン', english: 'Bread', essential: true },
-            { emoji: '🩹', japanese: '絆創膏', reading: 'ばんそうこう', english: 'Band-aid', essential: true },
-            { emoji: '🔋', japanese: '電池', reading: 'でんち', english: 'Battery', essential: true },
-            { emoji: '📱', japanese: '携帯電話', reading: 'けいたいでんわ', english: 'Mobile phone', essential: true },
-            { emoji: '🧥', japanese: '服', reading: 'ふく', english: 'Clothes', essential: true },
-            { emoji: '💰', japanese: 'お金', reading: 'おかね', english: 'Money', essential: true },
-            { emoji: '📄', japanese: '書類', reading: 'しょるい', english: 'Documents', essential: true },
+            { emoji: '💊', japanese: '薬', furigana: 'くすり', romaji: 'kusuri', english: 'Medicine', essential: true },
+            { emoji: '🔦', japanese: '懐中電灯', furigana: 'かいちゅうでんとう', romaji: 'kaichū dentō', english: 'Flashlight', essential: true },
+            { emoji: '🥤', japanese: '水', furigana: 'みず', romaji: 'mizu', english: 'Water', essential: true },
+            { emoji: '🍞', japanese: 'パン', furigana: '', romaji: 'pan', english: 'Bread', essential: true },
+            { emoji: '🩹', japanese: '絆創膏', furigana: 'ばんそうこう', romaji: 'bansōkō', english: 'Band-aid', essential: true },
+            { emoji: '🔋', japanese: '電池', furigana: 'でんち', romaji: 'denchi', english: 'Battery', essential: true },
+            { emoji: '📱', japanese: '携帯電話', furigana: 'けいたいでんわ', romaji: 'keitai denwa', english: 'Mobile phone', essential: true },
+            { emoji: '🧥', japanese: '服', furigana: 'ふく', romaji: 'fuku', english: 'Clothes', essential: true },
+            { emoji: '💰', japanese: 'お金', furigana: 'おかね', romaji: 'okane', english: 'Money', essential: true },
+            { emoji: '📄', japanese: '書類', furigana: 'しょるい', romaji: 'shorui', english: 'Documents', essential: true },
             // Non-essential items
-            { emoji: '🎮', japanese: 'ゲーム', reading: 'ゲーム', english: 'Game', essential: false },
-            { emoji: '🍰', japanese: 'ケーキ', reading: 'ケーキ', english: 'Cake', essential: false },
-            { emoji: '👠', japanese: 'ハイヒール', reading: 'ハイヒール', english: 'High heels', essential: false },
-            { emoji: '🎸', japanese: 'ギター', reading: 'ギター', english: 'Guitar', essential: false },
-            { emoji: '🧸', japanese: 'ぬいぐるみ', reading: 'ぬいぐるみ', english: 'Stuffed animal', essential: false },
-            { emoji: '💄', japanese: '口紅', reading: 'くちべに', english: 'Lipstick', essential: false },
-            { emoji: '🎭', japanese: 'マスク', reading: 'マスク', english: 'Theater mask', essential: false },
-            { emoji: '🏀', japanese: 'ボール', reading: 'ボール', english: 'Ball', essential: false }
+            { emoji: '🎮', japanese: 'ゲーム', furigana: '', romaji: 'gēmu', english: 'Game', essential: false },
+            { emoji: '🍰', japanese: 'ケーキ', furigana: '', romaji: 'kēki', english: 'Cake', essential: false },
+            { emoji: '👠', japanese: 'ハイヒール', furigana: '', romaji: 'hai hīru', english: 'High heels', essential: false },
+            { emoji: '🎸', japanese: 'ギター', furigana: '', romaji: 'gitā', english: 'Guitar', essential: false },
+            { emoji: '🧸', japanese: 'ぬいぐるみ', furigana: '', romaji: 'nuigurumi', english: 'Stuffed animal', essential: false },
+            { emoji: '💄', japanese: '口紅', furigana: 'くちべに', romaji: 'kuchibeni', english: 'Lipstick', essential: false },
+            { emoji: '🎭', japanese: 'マスク', furigana: '', romaji: 'masuku', english: 'Theater mask', essential: false },
+            { emoji: '🏀', japanese: 'ボール', furigana: '', romaji: 'bōru', english: 'Ball', essential: false }
         ];
 
         let gameTimer;
@@ -749,7 +918,7 @@
                 itemEl.className = 'item';
                 itemEl.innerHTML = `
                     <div class="item-emoji">${item.emoji}</div>
-                    <div class="item-label">${item.japanese}<br><small>${item.reading}</small></div>
+                    <div class="item-label">${item.japanese}<br><small>${item.romaji}</small></div>
                 `;
                 itemEl.draggable = true;
                 itemEl.dataset.essential = item.essential;
@@ -767,11 +936,22 @@
             emergencyItems.forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'vocab-card';
+                
+                // Create Japanese text with furigana
+                let japaneseDisplay = '';
+                if (item.furigana) {
+                    // Has kanji, show furigana above
+                    japaneseDisplay = `<ruby>${item.japanese}<rt>${item.furigana}</rt></ruby>`;
+                } else {
+                    // No kanji, just show the text
+                    japaneseDisplay = item.japanese;
+                }
+                
                 card.innerHTML = `
-                    <div class="vocab-japanese">${item.emoji} ${item.japanese}</div>
-                    <div class="vocab-reading">${item.reading}</div>
+                    <div class="vocab-japanese">${item.emoji} ${japaneseDisplay}</div>
+                    <div class="vocab-romaji">${item.romaji}</div>
                     <div class="vocab-english">${item.english}</div>
-                    <button class="play-button" onclick="speakWord('${item.japanese}', '${item.reading}')">
+                    <button class="play-button" onclick="speakWord('${item.japanese}', '${item.furigana || item.japanese}')">
                         🔊 音声
                     </button>
                 `;
@@ -1185,11 +1365,13 @@
             `;
             
             gameStats.missedEssentials.forEach(item => {
+                const displayReading = item.furigana ? `(${item.furigana})` : '';
                 html += `
                     <div class="missed-item">
                         <span style="font-size: 1.5em; margin-right: 10px;">${item.emoji}</span>
                         <div>
-                            <strong>${item.japanese}</strong> (${item.reading})<br>
+                            <strong>${item.japanese}</strong> ${displayReading}<br>
+                            <small style="color: #8e24aa; font-style: italic;">${item.romaji}</small><br>
                             <small style="color: #666;">${item.english}</small>
                         </div>
                     </div>
