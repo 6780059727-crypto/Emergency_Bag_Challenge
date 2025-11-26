@@ -495,10 +495,546 @@
             border-left: 5px solid #388e3c;
         }
 
-        .feedback-message.error {
+        .speech-status {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.9em;
+            z-index: 3000;
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            min-width: 250px;
+            text-align: center;
+        }
+
+        .speech-status.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .speech-status.success {
+            background: #4caf50;
+            color: white;
+            border: 2px solid #388e3c;
+        }
+
+        .speech-status.warning {
+            background: #ff9800;
+            color: white;
+            border: 2px solid #f57c00;
+        }
+
+        .speech-status.info {
+            background: #2196f3;
+            color: white;
+            border: 2px solid #1976d2;
+        }
+
+        .reading-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 4000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .reading-modal.show {
+            opacity: 1;
+        }
+
+        .reading-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .reading-modal.show .reading-content {
+            transform: scale(1);
+        }
+
+        .reading-content h3 {
+            color: #1976d2;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        .reading-japanese {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #4a148c;
+            margin-bottom: 15px;
+        }
+
+        .reading-phonetic {
+            font-size: 1.5em;
+            color: #7b1fa2;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .reading-content button {
+            background: #2196f3;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .player-modal, .difficulty-modal, .leaderboard-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .player-modal.show, .difficulty-modal.show, .leaderboard-modal.show {
+            opacity: 1;
+        }
+
+        .player-modal-content, .difficulty-modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .player-modal.show .player-modal-content,
+        .difficulty-modal.show .difficulty-modal-content {
+            transform: scale(1);
+        }
+
+        .player-modal-content h3, .difficulty-modal-content h3 {
+            color: #1976d2;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .player-modal-content p {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 25px;
+        }
+
+        #playerNameInput {
+            width: 80%;
+            padding: 15px;
+            font-size: 1.2em;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            text-align: center;
+            transition: border-color 0.3s ease;
+        }
+
+        #playerNameInput:focus {
+            outline: none;
+            border-color: #2196f3;
+            box-shadow: 0 0 10px rgba(33, 150, 243, 0.2);
+        }
+
+        .player-modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .player-modal-buttons button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        #startGameBtn {
+            background: #4caf50;
+            color: white;
+        }
+
+        #startGameBtn:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
+        #skipNameBtn {
+            background: #9e9e9e;
+            color: white;
+        }
+
+        #skipNameBtn:hover {
+            background: #757575;
+            transform: translateY(-2px);
+        }
+
+        .difficulty-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .difficulty-option {
+            background: white;
+            border: 3px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .difficulty-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .difficulty-option.easy {
+            border-color: #4caf50;
+        }
+
+        .difficulty-option.easy:hover {
+            background: #e8f5e8;
+        }
+
+        .difficulty-option.medium {
+            border-color: #ff9800;
+        }
+
+        .difficulty-option.medium:hover {
+            background: #fff3e0;
+        }
+
+        .difficulty-option.hard {
+            border-color: #f44336;
+        }
+
+        .difficulty-option.hard:hover {
+            background: #ffebee;
+        }
+
+        .diff-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .diff-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .diff-desc {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .view-scores-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .view-scores-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .leaderboard-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 800px;
+            width: 95%;
+            max-height: 90vh;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .leaderboard-modal.show .leaderboard-content {
+            transform: scale(1);
+        }
+
+        .leaderboard-header {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .leaderboard-header h3 {
+            font-size: 2em;
+            margin: 0;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .leaderboard-tabs {
+            display: flex;
+            background: #f5f5f5;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: #1976d2;
+            border-bottom: 3px solid #2196f3;
+        }
+
+        .tab-btn:hover {
+            background: #eeeeee;
+        }
+
+        .leaderboard-section {
+            padding: 25px 30px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .leaderboard-section.hidden {
+            display: none;
+        }
+
+        .leaderboard-section h4 {
+            color: #1976d2;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .score-table {
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .score-header {
+            display: grid;
+            grid-template-columns: 60px 1fr 80px 70px 100px;
+            background: #1976d2;
+            color: white;
+            font-weight: bold;
+            padding: 15px 10px;
+        }
+
+        .score-row {
+            display: grid;
+            grid-template-columns: 60px 1fr 80px 70px 100px;
+            padding: 12px 10px;
+            border-bottom: 1px solid #f0f0f0;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .score-row:hover {
+            background: #f8f9fa;
+        }
+
+        .score-row.top-three {
+            background: linear-gradient(135deg, #fffde7, #fff3e0);
+            font-weight: bold;
+        }
+
+        .rank {
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        .player-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .score-points {
+            font-weight: bold;
+            color: #4caf50;
+            text-align: center;
+        }
+
+        .completion-time {
+            color: #ff9800;
+            text-align: center;
+        }
+
+        .score-date {
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+
+        .no-scores {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            padding: 50px 0;
+        }
+
+        .leaderboard-footer {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .leaderboard-footer button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .leaderboard-footer button:first-child {
             background: #f44336;
             color: white;
-            border-left: 5px solid #d32f2f;
+        }
+
+        .leaderboard-footer button:first-child:hover {
+            background: #d32f2f;
+        }
+
+        .leaderboard-footer button:nth-child(2) {
+            background: #2196f3;
+            color: white;
+        }
+
+        .leaderboard-footer button:nth-child(2):hover {
+            background: #1976d2;
+        }
+
+        .leaderboard-footer button:last-child {
+            background: #9e9e9e;
+            color: white;
+        }
+
+        .leaderboard-footer button:last-child:hover {
+            background: #757575;
+        }
+
+        .score-achievement {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border: 2px solid #4caf50;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .score-achievement h4 {
+            color: #2e7d32;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .achievement-badge {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .rank-display {
+            font-size: 2.5em;
+            line-height: 1;
+        }
+
+        .achievement-text {
+            text-align: left;
+            color: #333;
+            font-size: 1.1em;
+        }
+
+        .achievement-text strong {
+            color: #1976d2;
+        }
+
+        .feedback-message.info {
+            background: #2196f3;
+            color: white;
+            border-left: 5px solid #1976d2;
         }
 
         .game-over-content {
@@ -770,6 +1306,167 @@
                 font-size: 0.8em;
                 padding: 10px;
             }
+            
+            .speech-status {
+                top: 10px;
+                left: 10px;
+                right: 10px;
+                transform: none;
+                min-width: auto;
+                font-size: 0.8em;
+                padding: 10px 15px;
+            }
+            
+            .speech-status.show {
+                transform: none;
+            }
+            
+            .reading-content {
+                padding: 25px;
+                width: 95%;
+            }
+            
+            .reading-content h3 {
+                font-size: 1.5em;
+            }
+            
+            .reading-japanese {
+                font-size: 2em;
+            }
+            
+            .reading-phonetic {
+                font-size: 1.2em;
+            }
+            
+            .player-modal-content, .difficulty-modal-content {
+                padding: 25px;
+                width: 95%;
+            }
+            
+            .player-modal-content h3, .difficulty-modal-content h3 {
+                font-size: 1.6em;
+            }
+            
+            #playerNameInput {
+                width: 90%;
+                padding: 12px;
+                font-size: 1.1em;
+            }
+            
+            .player-modal-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .player-modal-buttons button {
+                width: 100%;
+                padding: 15px;
+            }
+            
+            .difficulty-options {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .difficulty-option {
+                padding: 15px;
+            }
+            
+            .diff-icon {
+                font-size: 2.5em;
+            }
+            
+            .diff-title {
+                font-size: 1.2em;
+            }
+            
+            .view-scores-btn {
+                padding: 12px 20px;
+                font-size: 1.1em;
+            }
+            
+            .leaderboard-content {
+                width: 98%;
+                max-height: 95vh;
+            }
+            
+            .leaderboard-header {
+                padding: 20px 15px;
+            }
+            
+            .leaderboard-header h3 {
+                font-size: 1.5em;
+            }
+            
+            .leaderboard-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .tab-btn {
+                padding: 12px 10px;
+                font-size: 0.9em;
+                min-width: 25%;
+            }
+            
+            .leaderboard-section {
+                padding: 15px 10px;
+                max-height: 300px;
+            }
+            
+            .score-header {
+                grid-template-columns: 40px 1fr 60px 50px 70px;
+                padding: 10px 5px;
+                font-size: 0.8em;
+            }
+            
+            .score-row {
+                grid-template-columns: 40px 1fr 60px 50px 70px;
+                padding: 8px 5px;
+                font-size: 0.8em;
+            }
+            
+            .rank {
+                font-size: 1em;
+            }
+            
+            .player-name {
+                font-size: 0.8em;
+            }
+            
+            .leaderboard-footer {
+                padding: 15px 10px;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .leaderboard-footer button {
+                width: 100%;
+                padding: 12px;
+            }
+            
+            .score-achievement {
+                margin: 15px 0;
+                padding: 20px;
+            }
+            
+            .score-achievement h4 {
+                font-size: 1.3em;
+            }
+            
+            .achievement-badge {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .achievement-text {
+                text-align: center;
+                font-size: 1em;
+            }
+            
+            .rank-display {
+                font-size: 2em;
+            }
         }
     </style>
 </head>
@@ -793,14 +1490,11 @@
         </div>
 
         <div class="game-controls">
-            <button class="difficulty-btn easy" onclick="startGame('easy')">
-                かんたん<br>60秒
+            <button class="difficulty-btn easy" onclick="showPlayerNameInput()">
+                🎮 เริ่มเล่น
             </button>
-            <button class="difficulty-btn medium" onclick="startGame('medium')">
-                ふつう<br>30秒
-            </button>
-            <button class="difficulty-btn hard" onclick="startGame('hard')">
-                むずかしい<br>20秒
+            <button class="difficulty-btn medium" onclick="showLeaderboard()">
+                🏆 คะแนนสูงสุด
             </button>
         </div>
 
@@ -857,7 +1551,7 @@
             <h2>ゲーム終了！</h2>
             <p id="finalScore"></p>
             <p id="resultMessage"></p>
-            <button class="restart-btn" onclick="location.reload()">เล่นใหม่</button>
+            <button class="restart-btn" onclick="restartGame()">เล่นใหม่</button>
         </div>
     </div>
 
@@ -898,12 +1592,355 @@
             missedEssentials: [],
             incorrectChoices: []
         };
+        let playerName = '';
+
+        // Scoring system
+        function initScoreSystem() {
+            if (!localStorage.getItem('emergencyGameScores')) {
+                localStorage.setItem('emergencyGameScores', JSON.stringify([]));
+            }
+        }
+
+        function saveScore(playerName, score, difficulty, accuracy, completionTime) {
+            const scores = JSON.parse(localStorage.getItem('emergencyGameScores') || '[]');
+            const newScore = {
+                id: Date.now(),
+                playerName: playerName,
+                score: score,
+                difficulty: difficulty,
+                accuracy: accuracy,
+                completionTime: completionTime,
+                date: new Date().toLocaleDateString('th-TH'),
+                timestamp: Date.now()
+            };
+            
+            scores.push(newScore);
+            
+            // Sort by score (high to low), then by time (low to high)
+            scores.sort((a, b) => {
+                if (b.score === a.score) {
+                    return a.completionTime - b.completionTime;
+                }
+                return b.score - a.score;
+            });
+            
+            // Keep only top 50 scores
+            const topScores = scores.slice(0, 50);
+            localStorage.setItem('emergencyGameScores', JSON.stringify(topScores));
+            
+            return newScore;
+        }
+
+        function getTopScores(difficulty = 'all', limit = 10) {
+            const scores = JSON.parse(localStorage.getItem('emergencyGameScores') || '[]');
+            
+            if (difficulty !== 'all') {
+                return scores.filter(s => s.difficulty === difficulty).slice(0, limit);
+            }
+            
+            return scores.slice(0, limit);
+        }
+
+        function showPlayerNameInput() {
+            const modal = document.createElement('div');
+            modal.className = 'player-modal';
+            modal.innerHTML = `
+                <div class="player-modal-content">
+                    <h3>🎮 ใส่ชื่อผู้เล่น</h3>
+                    <p>ใส่ชื่อของคุณเพื่อบันทึกคะแนน</p>
+                    <input type="text" id="playerNameInput" placeholder="ชื่อผู้เล่น" maxlength="20" />
+                    <div class="player-modal-buttons">
+                        <button id="startGameBtn" onclick="startGameWithName()">เริ่มเล่น</button>
+                        <button id="skipNameBtn" onclick="startGameWithoutName()">เล่นโดยไม่บันทึก</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            
+            setTimeout(() => {
+                modal.classList.add('show');
+                document.getElementById('playerNameInput').focus();
+            }, 100);
+            
+            // Handle Enter key
+            document.getElementById('playerNameInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startGameWithName();
+                }
+            });
+        }
+
+        function startGameWithName() {
+            const nameInput = document.getElementById('playerNameInput');
+            playerName = nameInput.value.trim() || `ผู้เล่น${Date.now().toString().slice(-4)}`;
+            document.querySelector('.player-modal').remove();
+            showDifficultySelection();
+        }
+
+        function startGameWithoutName() {
+            playerName = '';
+            document.querySelector('.player-modal').remove();
+            showDifficultySelection();
+        }
+
+        function showDifficultySelection() {
+            const modal = document.createElement('div');
+            modal.className = 'difficulty-modal';
+            modal.innerHTML = `
+                <div class="difficulty-modal-content">
+                    <h3>⚡ เลือกระดับความยาก</h3>
+                    <div class="difficulty-options">
+                        <button class="difficulty-option easy" onclick="startGameFromModal('easy')">
+                            <div class="diff-icon">😊</div>
+                            <div class="diff-title">ง่าย</div>
+                            <div class="diff-desc">60 วินาที</div>
+                        </button>
+                        <button class="difficulty-option medium" onclick="startGameFromModal('medium')">
+                            <div class="diff-icon">😐</div>
+                            <div class="diff-title">ปานกลาง</div>
+                            <div class="diff-desc">30 วินาที</div>
+                        </button>
+                        <button class="difficulty-option hard" onclick="startGameFromModal('hard')">
+                            <div class="diff-icon">😤</div>
+                            <div class="diff-title">ยาก</div>
+                            <div class="diff-desc">20 วินาที</div>
+                        </button>
+                    </div>
+                    <button class="view-scores-btn" onclick="showLeaderboard()">🏆 ดูคะแนนสูงสุด</button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 100);
+        }
+
+        function startGameFromModal(difficulty) {
+            document.querySelector('.difficulty-modal').remove();
+            startGame(difficulty);
+        }
+
+        function showLeaderboard() {
+            const modal = document.createElement('div');
+            modal.className = 'leaderboard-modal';
+            modal.innerHTML = createLeaderboardHTML();
+            document.body.appendChild(modal);
+            
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 100);
+        }
+
+        function createLeaderboardHTML() {
+            const allScores = getTopScores('all', 20);
+            const easyScores = getTopScores('easy', 5);
+            const mediumScores = getTopScores('medium', 5);
+            const hardScores = getTopScores('hard', 5);
+            
+            return `
+                <div class="leaderboard-content">
+                    <div class="leaderboard-header">
+                        <h3>🏆 กระดานคะแนน</h3>
+                        <button class="close-btn" onclick="closeLeaderboard()">✕</button>
+                    </div>
+                    
+                    <div class="leaderboard-tabs">
+                        <button class="tab-btn active" onclick="showTab('all')">ทั้งหมด</button>
+                        <button class="tab-btn" onclick="showTab('easy')">ง่าย</button>
+                        <button class="tab-btn" onclick="showTab('medium')">ปานกลาง</button>
+                        <button class="tab-btn" onclick="showTab('hard')">ยาก</button>
+                    </div>
+                    
+                    <div class="leaderboard-section" id="tab-all">
+                        <h4>🏆 คะแนนสูงสุด (ทุกระดับ)</h4>
+                        ${createScoreTable(allScores)}
+                    </div>
+                    
+                    <div class="leaderboard-section hidden" id="tab-easy">
+                        <h4>😊 ระดับง่าย</h4>
+                        ${createScoreTable(easyScores)}
+                    </div>
+                    
+                    <div class="leaderboard-section hidden" id="tab-medium">
+                        <h4>😐 ระดับปานกลาง</h4>
+                        ${createScoreTable(mediumScores)}
+                    </div>
+                    
+                    <div class="leaderboard-section hidden" id="tab-hard">
+                        <h4>😤 ระดับยาก</h4>
+                        ${createScoreTable(hardScores)}
+                    </div>
+                    
+                    <div class="leaderboard-footer">
+                        <button onclick="clearAllScores()">🗑️ ล้างคะแนนทั้งหมด</button>
+                        <button onclick="exportScores()">📤 ส่งออกคะแนน</button>
+                        <button onclick="closeLeaderboard()">ปิด</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function createScoreTable(scores) {
+            if (scores.length === 0) {
+                return '<p class="no-scores">ยังไม่มีคะแนนในระดับนี้</p>';
+            }
+            
+            let html = `
+                <div class="score-table">
+                    <div class="score-header">
+                        <div>อันดับ</div>
+                        <div>ผู้เล่น</div>
+                        <div>คะแนน</div>
+                        <div>เวลา</div>
+                        <div>วันที่</div>
+                    </div>
+            `;
+            
+            scores.forEach((score, index) => {
+                const medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `${index + 1}`;
+                const difficultyIcon = score.difficulty === 'easy' ? '😊' : 
+                                     score.difficulty === 'medium' ? '😐' : '😤';
+                
+                html += `
+                    <div class="score-row ${index < 3 ? 'top-three' : ''}">
+                        <div class="rank">${medal}</div>
+                        <div class="player-name">${score.playerName} ${difficultyIcon}</div>
+                        <div class="score-points">${score.score}</div>
+                        <div class="completion-time">${score.completionTime}วิ</div>
+                        <div class="score-date">${score.date}</div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            return html;
+        }
+
+        function showTab(tabName) {
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.leaderboard-section').forEach(section => section.classList.add('hidden'));
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+            document.getElementById(`tab-${tabName}`).classList.remove('hidden');
+        }
+
+        function closeLeaderboard() {
+            const modal = document.querySelector('.leaderboard-modal');
+            if (modal) modal.remove();
+        }
+
+        function clearAllScores() {
+            if (confirm('คุณแน่ใจหรือไม่ที่จะล้างคะแนนทั้งหมด?')) {
+                localStorage.removeItem('emergencyGameScores');
+                showFeedbackMessage('🗑️ ล้างคะแนนเรียบร้อยแล้ว', 'info');
+                closeLeaderboard();
+            }
+        }
+
+        function exportScores() {
+            const scores = JSON.parse(localStorage.getItem('emergencyGameScores') || '[]');
+            const dataStr = JSON.stringify(scores, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `emergency-game-scores-${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            
+            URL.revokeObjectURL(url);
+            showFeedbackMessage('📤 ส่งออกคะแนนเรียบร้อย', 'success');
+        }
+
+        function restartGame() {
+            // Close game over modal
+            document.getElementById('gameOver').style.display = 'none';
+            
+            // Reset all game variables
+            score = 0;
+            gameActive = false;
+            currentDifficulty = '';
+            playerName = '';
+            gameStats = {
+                correctItems: 0,
+                incorrectItems: 0,
+                totalItems: 0,
+                timeUsed: 0,
+                missedEssentials: [],
+                incorrectChoices: []
+            };
+            
+            // Clear timer if exists
+            if (gameTimer) {
+                clearInterval(gameTimer);
+            }
+            
+            // Reset UI
+            document.getElementById('score').textContent = '0';
+            document.getElementById('timeLeft').textContent = '--';
+            document.getElementById('timeLeft').style.color = '';
+            document.getElementById('timeLeft').style.fontWeight = '';
+            
+            // Clear bag
+            document.getElementById('bagInterior').innerHTML = '';
+            
+            // Recreate items
+            createItemsGrid();
+            setupDragAndDrop();
+            
+            // Show player name input to start new game
+            showPlayerNameInput();
+        }
 
         // Initialize game
         function initGame() {
             createItemsGrid();
             createVocabularyCards();
             setupDragAndDrop();
+            
+            // Initialize speech synthesis
+            initSpeechSynthesis();
+            
+            // Initialize scoring system
+            initScoreSystem();
+            
+            // Add first touch handler for mobile speech synthesis
+            addFirstInteractionHandler();
+        }
+
+        function addFirstInteractionHandler() {
+            let firstInteraction = true;
+            
+            function handleFirstInteraction() {
+                if (firstInteraction && speechSupported) {
+                    firstInteraction = false;
+                    
+                    // Re-initialize speech synthesis on first user interaction
+                    try {
+                        const utterance = new SpeechSynthesisUtterance('');
+                        utterance.volume = 0;
+                        speechSynthesis.speak(utterance);
+                        speechSynthesis.cancel();
+                        
+                        speechEnabled = true;
+                        showSpeechStatus('🔊 เสียงเปิดใช้งานแล้ว!', 'success');
+                    } catch (error) {
+                        console.error('Error initializing speech on first interaction:', error);
+                        speechEnabled = false;
+                    }
+                    
+                    // Remove event listeners after first interaction
+                    document.removeEventListener('click', handleFirstInteraction);
+                    document.removeEventListener('touchstart', handleFirstInteraction);
+                }
+            }
+            
+            // Add event listeners for first user interaction
+            document.addEventListener('click', handleFirstInteraction, { once: true });
+            document.addEventListener('touchstart', handleFirstInteraction, { once: true });
         }
 
         function createItemsGrid() {
@@ -959,15 +1996,110 @@
             });
         }
 
-        function speakWord(japanese, reading) {
+        // Speech synthesis setup
+        let speechEnabled = false;
+        let speechSupported = false;
+
+        // Initialize speech synthesis
+        function initSpeechSynthesis() {
             if ('speechSynthesis' in window) {
+                speechSupported = true;
+                
+                // For mobile devices, we need to trigger speechSynthesis on user interaction
+                if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                    // Mobile device detected
+                    const utterance = new SpeechSynthesisUtterance('');
+                    utterance.volume = 0;
+                    speechSynthesis.speak(utterance);
+                    speechSynthesis.cancel();
+                }
+                
+                speechEnabled = true;
+                showSpeechStatus('🔊 เสียงพร้อมใช้งาน', 'success');
+            } else {
+                speechSupported = false;
+                speechEnabled = false;
+                showSpeechStatus('⚠️ อุปกรณ์นี้ไม่รองรับเสียงออกเสียง', 'warning');
+            }
+        }
+
+        function showSpeechStatus(message, type) {
+            const statusEl = document.createElement('div');
+            statusEl.className = `speech-status ${type}`;
+            statusEl.textContent = message;
+            document.body.appendChild(statusEl);
+            
+            setTimeout(() => {
+                statusEl.classList.add('show');
+            }, 100);
+            
+            setTimeout(() => {
+                statusEl.remove();
+            }, 4000);
+        }
+
+        function speakWord(japanese, reading) {
+            if (!speechSupported) {
+                // Fallback: show reading in popup
+                showReadingFallback(japanese, reading);
+                return;
+            }
+
+            if (!speechEnabled) {
+                // Try to re-initialize
+                initSpeechSynthesis();
+                if (!speechEnabled) {
+                    showReadingFallback(japanese, reading);
+                    return;
+                }
+            }
+
+            try {
+                // Stop any currently speaking utterance
+                speechSynthesis.cancel();
+                
                 const utterance = new SpeechSynthesisUtterance(japanese);
                 utterance.lang = 'ja-JP';
                 utterance.rate = 0.8;
+                utterance.pitch = 1;
+                utterance.volume = 1;
+                
+                utterance.onerror = function(event) {
+                    console.error('Speech synthesis error:', event.error);
+                    showReadingFallback(japanese, reading);
+                };
+                
+                utterance.onend = function() {
+                    console.log('Speech finished successfully');
+                };
+                
                 speechSynthesis.speak(utterance);
-            } else {
-                alert(`発音: ${reading}`);
+                
+                // Visual feedback that speech is working
+                showFeedbackMessage(`🔊 ${japanese} (${reading})`, 'info');
+                
+            } catch (error) {
+                console.error('Error in speech synthesis:', error);
+                showReadingFallback(japanese, reading);
             }
+        }
+
+        function showReadingFallback(japanese, reading) {
+            const modal = document.createElement('div');
+            modal.className = 'reading-modal';
+            modal.innerHTML = `
+                <div class="reading-content">
+                    <h3>📖 การอ่าน</h3>
+                    <div class="reading-japanese">${japanese}</div>
+                    <div class="reading-phonetic">${reading || japanese}</div>
+                    <button onclick="this.parentElement.parentElement.remove()">ปิด</button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 100);
         }
 
         function setupDragAndDrop() {
@@ -1274,8 +2406,22 @@
             const finalScore = document.getElementById('finalScore');
             const resultMessage = document.getElementById('resultMessage');
             
+            // Save score if player name exists
+            let savedScore = null;
+            let rank = null;
+            if (playerName) {
+                const accuracy = gameStats.totalItems > 0 ? 
+                    Math.round((gameStats.correctItems / gameStats.totalItems) * 100) : 0;
+                
+                savedScore = saveScore(playerName, score, currentDifficulty, accuracy, gameStats.timeUsed);
+                
+                // Find player's rank
+                const topScores = getTopScores(currentDifficulty, 50);
+                rank = topScores.findIndex(s => s.id === savedScore.id) + 1;
+            }
+            
             // Create comprehensive results display
-            const resultsHTML = createGameResults(won);
+            const resultsHTML = createGameResults(won, savedScore, rank);
             
             finalScore.innerHTML = resultsHTML;
             
@@ -1296,14 +2442,43 @@
             return essentialItems.filter(item => !packedEmojis.includes(item.emoji));
         }
 
-        function createGameResults(won) {
+        function createGameResults(won, savedScore = null, rank = null) {
             const accuracy = gameStats.totalItems > 0 ? 
                 Math.round((gameStats.correctItems / gameStats.totalItems) * 100) : 0;
             
             const essentialCount = emergencyItems.filter(item => item.essential).length;
             const completionRate = Math.round((gameStats.correctItems / essentialCount) * 100);
             
+            let scoreSection = '';
+            if (savedScore && rank) {
+                const rankDisplay = rank <= 3 ? 
+                    (rank === 1 ? '🥇 อันดับ 1' : rank === 2 ? '🥈 อันดับ 2' : '🥉 อันดับ 3') :
+                    `🏆 อันดับ ${rank}`;
+                
+                scoreSection = `
+                    <div class="score-achievement">
+                        <h4>🎊 บันทึกคะแนนแล้ว!</h4>
+                        <div class="achievement-badge">
+                            <div class="rank-display">${rankDisplay}</div>
+                            <div class="achievement-text">
+                                ผู้เล่น: <strong>${savedScore.playerName}</strong><br>
+                                ระดับ: <strong>${getDifficultyName(currentDifficulty)}</strong>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (playerName === '') {
+                scoreSection = `
+                    <div class="score-achievement">
+                        <h4>💡 เคล็ดลับ</h4>
+                        <p>ใส่ชื่อก่อนเล่นเพื่อบันทึกคะแนนในกระดานคะแนน!</p>
+                    </div>
+                `;
+            }
+            
             return `
+                ${scoreSection}
+                
                 <div class="stats-section">
                     <h3>📊 ผลการเล่น</h3>
                     <div class="stats-grid">
@@ -1339,6 +2514,15 @@
                 ${createIncorrectChoicesSectionThai()}
                 ${createAIFeedbackThai(won, accuracy, completionRate)}
             `;
+        }
+
+        function getDifficultyName(difficulty) {
+            const names = {
+                'easy': 'ง่าย (60วิ)',
+                'medium': 'ปานกลาง (30วิ)', 
+                'hard': 'ยาก (20วิ)'
+            };
+            return names[difficulty] || difficulty;
         }
 
         function getPerformanceBadgeThai(accuracy, completion) {
